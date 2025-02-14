@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.ds_lab_project;
 
 import java.util.ArrayDeque;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
-
-/**
- * @author Abdullah Maqsood
- */
 
 // The refactored version follows SRP by splitting responsibilities into
 // separate classes:

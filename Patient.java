@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.frontend;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-/**
- * @author Abdullah Maqsood
- */
 
 // The original 'Patient' class violates SRP as it combines multiple responsibilities: 
 // managing personal details, handling billing, and storing medical records. 
