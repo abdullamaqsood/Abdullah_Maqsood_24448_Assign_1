@@ -8,9 +8,8 @@ import java.util.Queue;
 // The original 'HashGraph' class violates SRP as it combines multiple
 // responsibilities:
 // graph structure management, traversal operations, and pathfinding. Mixing
-// these concerns
-// makes the class complex and difficult to modify without affecting unrelated
-// functionalities.
+// these concerns makes the class complex and difficult to modify without affecting
+// unrelated functionalities.
 
 public class HashGraph {
     vertex[] adj_list;

@@ -9,8 +9,7 @@ import java.util.Queue;
 // separate classes:
 // 'Graph' for structure management, 'GraphTraversal' for searching operations,
 // and 'PathFinder' for shortest path calculations. This modular approach
-// improves maintainability,
-// readability, and scalability by ensuring each class has a single,
+// improves maintainability and readability by ensuring each class has a single,
 // well-defined responsibility.
 
 class Graph {
@@ -118,12 +117,12 @@ class GraphTraversal {
     }
 
     public String toString() {
-        StringBuilder a = new StringBuilder();
-        for (int i = 0; i < graph.count; i++) {
-            a.append("Name: ").append(graph.adj_list[i].name).append("\n");
-            a.append("Friends: ").append(graph.adj_list[i].friend_list).append("\n\n");
+        String a = "";
+        for (int i = 0; i < count; i++) {
+            a = a + "Name: " + adj_list[i].name + "\n";
+            a = a + "Friends: " + adj_list[i].friend_list + "\n" + "\n";
         }
-        return a.toString();
+        return a;
     }
 }
 

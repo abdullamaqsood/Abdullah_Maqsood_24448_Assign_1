@@ -4,8 +4,8 @@ import java.util.Date;
 
 // The refactored version follows SRP by splitting concerns into separate classes: 
 // 'EmployeeDetails' for personal information, 'PayrollSystem' for salary and tax calculations, 
-// and 'AttendanceSystem' for tracking clock-ins and leave. This improves modularity, 
-// maintainability, and scalability by ensuring that each class has a single responsibility.
+// and 'AttendanceSystem' for tracking clock-ins and leave. This improves modularity and
+// maintainability by ensuring that each class has a single responsibility.
 
 class EmployeeDetails {
     private String name;
