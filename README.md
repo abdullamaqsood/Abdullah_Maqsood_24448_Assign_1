@@ -17,15 +17,10 @@ This repository contains five Java classes that demonstrate the **Single Respons
   - `PayrollSystem` → Handles salary calculations and bonuses.
   - `AttendanceSystem` → Manages employee attendance and leave tracking.
 
-## **3. HashGraph.java**
-- The original `HashGraph` class **violated SRP** by managing:
-  - Graph structure (adding/removing vertices and edges)
-  - Graph traversal (searching and retrieving connections)
-  - Pathfinding (finding the shortest path using BFS)
-- The refactored version separates these concerns:
-  - `Graph` → Manages the structure of the graph.
-  - `GraphTraversal` → Handles searching for vertices and displaying adjacency lists.
-  - `PathFinder` → Implements pathfinding algorithms like BFS.
+## **3. OrderProcessing.java**
+- The `OrderProcessing` class follows SRP by managing **only order-related operations**.
+- It provides functionalities like creating, updating, canceling, and displaying orders.
+- Since it does not handle payments, inventory, or user authentication, it remains focused and maintainable.
 
 ## **4. Library.java**
 - The original `Library` class **violated SRP** by mixing:
@@ -48,6 +43,6 @@ This repository contains five Java classes that demonstrate the **Single Respons
   - `MedicalRecords` → Handles patient history and records.
 
 ## **Conclusion**
-- The **original versions** of the `Employee`, `HashGraph`, `Library`, and `Patient` classes **violated SRP** by combining multiple concerns into a single class.
+- The **original versions** of the `Employee`, `Library`, and `Patient` classes **violated SRP** by combining multiple concerns into a single class.
 - The **refactored versions** improve maintainability and readability by ensuring **each class has a single, well-defined responsibility**.
-- The `BankAccount` class already followed SRP and did not require refactoring.
+- The `BankAccount` and `OrderProcessing` classes already followed SRP and did not require refactoring.
