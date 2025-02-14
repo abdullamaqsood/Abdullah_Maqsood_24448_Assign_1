@@ -49,5 +49,5 @@ This repository contains five Java classes that demonstrate the **Single Respons
 
 ## **Conclusion**
 - The **original versions** of the `Employee`, `HashGraph`, `Library`, and `Patient` classes **violated SRP** by combining multiple concerns into a single class.
-- The **refactored versions** improve maintainability, readability, and scalability by ensuring **each class has a single, well-defined responsibility**.
+- The **refactored versions** improve maintainability and readability by ensuring **each class has a single, well-defined responsibility**.
 - The `BankAccount` class already followed SRP and did not require refactoring.
