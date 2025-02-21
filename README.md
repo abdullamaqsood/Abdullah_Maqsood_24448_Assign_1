@@ -2,36 +2,36 @@
 
 ## **1. Employee Management System (`Employee_OCP`)**  
 ### **Problem**  
-The original `Employee` class was trying to do too much at once—handling employee details, tax calculations, salary processing, time tracking, and leave management, all in a single place. This made it difficult to introduce changes, like adding a new tax policy or a different leave structure, without modifying the core code. Over time, this would make the system harder to maintain and scale, breaking the Open/Closed Principle (OCP).  
+The original `Employee` class was overloaded with multiple responsibilities—it managed employee details, tax calculations, salary processing, time tracking, and leave management, all within a single class. This made it difficult to introduce changes, such as implementing a new tax policy or modifying leave structures, without directly modifying the core class. Over time, this led to a **rigid and difficult-to-maintain system**, violating the **Open/Closed Principle (OCP)** by requiring modifications to accommodate new features.  
 
 ### **Solution**  
-To fix this, I broke the class into smaller, dedicated components:  
-- **`Employee_OCP`** → Stores only employee-related details.  
-- **`TaxCalculator` Interface** → Allows for different tax policies to be applied dynamically.  
-- **`SalaryCalculator`** → Manages salary and bonuses separately.  
-- **`TimeTracker`** → Handles clock-in and clock-out operations.  
-- **`LeavePolicy` Interface** → Supports different types of leave policies, such as sick leave and vacation leave.  
+To address this issue, the class was broken down into dedicated components that handle specific responsibilities:  
+- **`Employee_OCP`** → Stores only essential employee attributes.  
+- **`TaxCalculator` Abstract Class** → Allows for different tax policies to be implemented dynamically.  
+- **`SalaryCalculator`** → Manages salary computations, including tax deductions and bonuses.  
+- **`TimeTracker` Abstract Class** → Handles employee clock-in and clock-out functionality.  
+- **`LeavePolicy` Abstract Class** → Supports different types of leave management, such as sick leave and vacation leave.  
 
 ### **Why This is Better**  
-Now, the system is much easier to extend. If a new tax rule or leave policy needs to be introduced, it can be done without modifying the core employee class. Each component focuses on a single responsibility, making the code cleaner and easier to manage. On top of that, salary and leave rules can be changed independently, allowing businesses to adapt quickly without disrupting the entire system.  
+Now, the system is **highly extensible and adaptable**. New tax rules, salary structures, or leave policies can be introduced **without modifying existing code**, ensuring long-term maintainability. Each component has a **single responsibility**, making the system **more organized, modular, and easier to test**. Additionally, salary and leave policies can be adjusted independently, allowing businesses to **customize the system to their needs without introducing unnecessary complexity**.  
 
----  
+---
 
 ## **2. Library Management System (`Library_OCP`)**  
 ### **Problem**  
-The original `Library` class had everything thrown into one place—managing books, users, and borrowing transactions. This made it messy and difficult to scale. If we wanted to introduce new features like digital books, premium memberships, or late return penalties, we would have had to modify the entire class. This not only made the code fragile but also violated OCP by making future changes more complex than they needed to be.  
+The original `Library` class was an **all-in-one** implementation, handling book management, user management, and borrowing transactions within a single class. This made the system **difficult to scale**, as adding new features—such as **digital books, premium memberships, or late return penalties**—required modifying the core class, violating **OCP** and making the system **prone to breaking existing functionality**.  
 
 ### **Solution**  
-The new design embraces interfaces and dependency injection to keep things modular:  
-- **`Library_OCP`** → Acts as a controller, handling dependencies instead of logic.  
-- **`BookManager` Interface** → Keeps book-related operations separate.  
-- **`UserManager` Interface** → Manages user accounts independently.  
-- **`BorrowingService` Interface** → Handles different borrowing policies.   
+To create a **scalable and modular system**, the code was restructured into separate abstract classes:  
+- **`Library_OCP`** → Serves as a central controller, managing dependencies without handling logic directly.  
+- **`BookManager` Abstract Class** → Manages book-related operations, allowing different implementations for physical and digital books.  
+- **`UserManager` Abstract Class** → Handles user account management separately.  
+- **`BorrowingService` Abstract Class** → Supports different borrowing policies, ensuring future extensibility.    
 
 ### **Why This is Better**  
-With this new approach, the system is scalable and modular. If we want to integrate a database-backed book manager or introduce new borrowing rules, we can do so without breaking existing functionality. The system also allows flexible borrowing policies, meaning we can easily introduce premium memberships, late fees, or digital book lending.
+The new structure **ensures modularity**, making it easy to introduce new features **without modifying core components**. If we need to integrate a **database-backed book manager** or introduce **custom borrowing rules**, these can be implemented as new subclasses without affecting the rest of the system. This approach also allows **flexible borrowing policies**, making it simple to add **premium memberships, late return fees, or digital lending options** in the future.  
 
----  
+---
 
 ## **Final Thoughts**  
-Both systems are now clean, modular, and ready for the future. By following OCP and using dependency injection, I have made it so that new features can be added without rewriting existing code.
+Both systems have been **cleanly refactored**, making them **modular, scalable, and future-proof**. By following the **Open/Closed Principle (OCP)** and using **dependency injection**, the code is now designed to **support new features without requiring modifications to existing logic**.

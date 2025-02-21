@@ -2,12 +2,12 @@ package com.mycompany.hr;
 
 import java.util.Date;
 
-// This refactored code follows the Open/Closed Principle (OCP) by ensuring that each responsibility 
+// This refactored version follows the Open/Closed Principle (OCP) by ensuring that each responsibility 
 // is handled separately, making the system extensible without modifying existing code. 
-// Employee_OCP only contains employee attributes, while salary computation, tax calculation, 
-// time tracking, and leave management are handled by dedicated classes/interfaces. 
+// Abstract classes for tax calculation, salary computation, time tracking, and leave management provide 
+// a structured foundation while allowing different implementations to be added seamlessly. 
 // Dependency Injection is implemented in SalaryCalculator to allow dynamic tax policies, 
-// and an interface for leave management enables flexible leave policies.
+// and abstract classes for leave management enable flexible leave policies.
 
 public class Employee_OCP {
     protected String name;
@@ -40,15 +40,19 @@ public class Employee_OCP {
     }
 }
 
-interface TaxCalculator {
-    double calculateTax(double salary);
+abstract class TaxCalculator {
+    protected double taxRate;
+
+    public TaxCalculator(double taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public abstract double calculateTax(double salary);
 }
 
-class StandardTaxCalculator implements TaxCalculator {
-    private double taxRate;
-
+class StandardTaxCalculator extends TaxCalculator {
     public StandardTaxCalculator(double taxRate) {
-        this.taxRate = taxRate;
+        super(taxRate);
     }
 
     @Override
@@ -79,16 +83,23 @@ class SalaryCalculator {
     }
 }
 
-class TimeTracker {
-    private boolean isClockedIn;
-    private Date lastClockIn;
+abstract class TimeTracker {
+    protected boolean isClockedIn;
+    protected Date lastClockIn;
 
+    public abstract void clockIn(String employeeName);
+    public abstract void clockOut(String employeeName);
+}
+
+class DefaultTimeTracker extends TimeTracker {
+    @Override
     public void clockIn(String employeeName) {
         isClockedIn = true;
         lastClockIn = new Date();
         System.out.println(employeeName + " clocked in at " + lastClockIn);
     }
 
+    @Override
     public void clockOut(String employeeName) {
         if (isClockedIn) {
             isClockedIn = false;
@@ -99,16 +110,22 @@ class TimeTracker {
     }
 }
 
-interface LeavePolicy {
-    boolean requestLeave(String employeeName, int days);
-    int getLeaveBalance();
+abstract class LeavePolicy {
+    protected int leaveBalance;
+
+    public LeavePolicy(int initialLeaveBalance) {
+        this.leaveBalance = initialLeaveBalance;
+    }
+
+    public abstract boolean requestLeave(String employeeName, int days);
+    public int getLeaveBalance() {
+        return leaveBalance;
+    }
 }
 
-class StandardLeaveManager implements LeavePolicy {
-    private int leaveBalance;
-
+class StandardLeaveManager extends LeavePolicy {
     public StandardLeaveManager(int initialLeaveBalance) {
-        this.leaveBalance = initialLeaveBalance;
+        super(initialLeaveBalance);
     }
 
     @Override
@@ -122,34 +139,22 @@ class StandardLeaveManager implements LeavePolicy {
             return false;
         }
     }
-
-    @Override
-    public int getLeaveBalance() {
-        return leaveBalance;
-    }
 }
 
-class SickLeaveManager implements LeavePolicy {
-    private int sickLeaveBalance;
-
+class SickLeaveManager extends LeavePolicy {
     public SickLeaveManager(int initialSickLeave) {
-        this.sickLeaveBalance = initialSickLeave;
+        super(initialSickLeave);
     }
 
     @Override
     public boolean requestLeave(String employeeName, int days) {
-        if (sickLeaveBalance >= days) {
-            sickLeaveBalance -= days;
-            System.out.println(employeeName + " took " + days + " days of sick leave. Remaining: " + sickLeaveBalance);
+        if (leaveBalance >= days) {
+            leaveBalance -= days;
+            System.out.println(employeeName + " took " + days + " days of sick leave. Remaining: " + leaveBalance);
             return true;
         } else {
             System.out.println("Insufficient sick leave balance.");
             return false;
         }
-    }
-
-    @Override
-    public int getLeaveBalance() {
-        return sickLeaveBalance;
     }
 }

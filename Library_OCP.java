@@ -3,10 +3,10 @@ package com.mycompany.library;
 import java.util.ArrayList;
 
 // This refactored version follows the Open/Closed Principle (OCP) by structuring the system to be easily extendable 
-// without modifying existing code. Interfaces for BookManager, UserManager, and BorrowingService allow new implementations 
-// to be added seamlessly. Library_OCP uses dependency injection to improve flexibility, making it easier to replace or update 
-// components as needed. This ensures the system remains modular, scalable, and adaptable to future changes.
-
+// without modifying existing code. Abstract classes for BookManager, UserManager, and BorrowingService provide 
+// a flexible foundation for different implementations while maintaining common functionality. Library_OCP uses 
+// dependency injection to improve flexibility, making it easier to replace or update components as needed. 
+// This ensures the system remains modular, scalable, and adaptable to future changes.
 
 public class Library_OCP {
     private BookManager bookManager;
@@ -44,38 +44,26 @@ public class Library_OCP {
     }
 }
 
+abstract class BookManager {
+    protected ArrayList<Book> books = new ArrayList<>();
 
-interface BookManager {
-    void addBook(Book book);
-    void removeBook(Book book);
-    boolean isBookAvailable(Book book);
-    void borrowBook(Book book);
-    void returnBook(Book book);
-}
-
-
-class DefaultBookManager implements BookManager {
-    private ArrayList<Book> books;
-
-    public DefaultBookManager() {
-        books = new ArrayList<>();
-    }
-
-    @Override
     public void addBook(Book book) {
         books.add(book);
     }
 
-    @Override
     public void removeBook(Book book) {
         books.remove(book);
     }
 
-    @Override
     public boolean isBookAvailable(Book book) {
         return books.contains(book);
     }
 
+    public abstract void borrowBook(Book book);
+    public abstract void returnBook(Book book);
+}
+
+class DefaultBookManager extends BookManager {
     @Override
     public void borrowBook(Book book) {
         books.remove(book);
@@ -87,55 +75,39 @@ class DefaultBookManager implements BookManager {
     }
 }
 
+abstract class UserManager {
+    protected ArrayList<User> users = new ArrayList<>();
 
-interface UserManager {
-    void addUser(User user);
-    void removeUser(User user);
-    boolean isUserRegistered(User user);
-}
-
-
-class DefaultUserManager implements UserManager {
-    private ArrayList<User> users;
-
-    public DefaultUserManager() {
-        users = new ArrayList<>();
-    }
-
-    @Override
     public void addUser(User user) {
         users.add(user);
     }
 
-    @Override
     public void removeUser(User user) {
         users.remove(user);
     }
 
-    @Override
     public boolean isUserRegistered(User user) {
         return users.contains(user);
     }
 }
 
+class DefaultUserManager extends UserManager {}
 
-interface BorrowingService {
-    void borrowBook(User user, Book book);
-    void returnBook(User user, Book book);
-}
+abstract class BorrowingService {
+    protected ArrayList<String> borrowedBooks = new ArrayList<>();
+    protected BookManager bookManager;
 
-
-class DefaultBorrowingService implements BorrowingService {
-    private ArrayList<String> borrowedBooks;
-    private BookManager bookManager;
-
-    public DefaultBorrowingService(BookManager bookManager) {
+    public BorrowingService(BookManager bookManager) {
         this.bookManager = bookManager;
-        borrowedBooks = new ArrayList<>();
     }
 
-    public void setBookManager(BookManager bookManager) {
-        this.bookManager = bookManager;
+    public abstract void borrowBook(User user, Book book);
+    public abstract void returnBook(User user, Book book);
+}
+
+class DefaultBorrowingService extends BorrowingService {
+    public DefaultBorrowingService(BookManager bookManager) {
+        super(bookManager);
     }
 
     @Override
