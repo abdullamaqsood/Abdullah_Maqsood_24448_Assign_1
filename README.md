@@ -30,7 +30,7 @@ The new design embraces **interfaces and dependency injection** to keep things m
 - **`DefaultBookManager`, `DefaultUserManager`, `DefaultBorrowingService`** → Provide basic implementations, which can be replaced as needed.  
 
 ### **Why This is Better**  
-With this new approach, the system is scalable and modular. If we want to integrate a database-backed book manager or introduce new borrowing rules, we can do so without breaking existing functionality. The system also allows flexible borrowing policies, meaning we can easily introduce premium memberships, late fees, or digital book lending. Most importantly, it’s future-proof—we can now add features like reservations, e-book lending, or different user memberships without modifying existing code.
+With this new approach, the system is scalable and modular. If we want to integrate a database-backed book manager or introduce new borrowing rules, we can do so without breaking existing functionality. The system also allows flexible borrowing policies, meaning we can easily introduce premium memberships, late fees, or digital book lending.
 
 ---  
 
