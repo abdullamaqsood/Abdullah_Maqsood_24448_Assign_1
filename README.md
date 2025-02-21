@@ -22,12 +22,11 @@ Now, the system is much easier to extend. If a new tax rule or leave policy need
 The original `Library` class had everything thrown into one place—managing books, users, and borrowing transactions. This made it messy and difficult to scale. If we wanted to introduce new features like digital books, premium memberships, or late return penalties, we would have had to modify the entire class. This not only made the code fragile but also violated OCP by making future changes more complex than they needed to be.  
 
 ### **Solution**  
-The new design embraces **interfaces and dependency injection** to keep things modular:  
+The new design embraces interfaces and dependency injection to keep things modular:  
 - **`Library_OCP`** → Acts as a controller, handling dependencies instead of logic.  
 - **`BookManager` Interface** → Keeps book-related operations separate.  
 - **`UserManager` Interface** → Manages user accounts independently.  
-- **`BorrowingService` Interface** → Handles different borrowing policies.  
-- **`DefaultBookManager`, `DefaultUserManager`, `DefaultBorrowingService`** → Provide basic implementations, which can be replaced as needed.  
+- **`BorrowingService` Interface** → Handles different borrowing policies.   
 
 ### **Why This is Better**  
 With this new approach, the system is scalable and modular. If we want to integrate a database-backed book manager or introduce new borrowing rules, we can do so without breaking existing functionality. The system also allows flexible borrowing policies, meaning we can easily introduce premium memberships, late fees, or digital book lending.

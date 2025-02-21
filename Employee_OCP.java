@@ -6,7 +6,7 @@ import java.util.Date;
 // is handled separately, making the system extensible without modifying existing code. 
 // Employee_OCP only contains employee attributes, while salary computation, tax calculation, 
 // time tracking, and leave management are handled by dedicated classes/interfaces. 
-// Dependency Injection (DI) is implemented in SalaryCalculator to allow dynamic tax policies, 
+// Dependency Injection is implemented in SalaryCalculator to allow dynamic tax policies, 
 // and an interface for leave management enables flexible leave policies.
 
 public class Employee_OCP {
