@@ -2,9 +2,10 @@ package com.mycompany.library;
 
 import java.util.ArrayList;
 
-// The original 'Library' class violates SRP because it combines multiple responsibilities: 
-// managing books, handling users, and processing borrowing transactions. This tight coupling 
-// makes the class harder to maintain and modify, as changes in one function can impact others.
+// This class violates the Open/Closed Principle (OCP) because it combines multiple responsibilities: 
+// book management, user management, and borrowing transactions. Any modifications, such as adding 
+// new borrowing rules or different types of users, would require changing this class, making it harder 
+// to extend and maintain.
 
 public class Library {
     private ArrayList<Book> books;

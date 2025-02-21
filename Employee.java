@@ -2,10 +2,11 @@ package com.mycompany.hr;
 
 import java.util.Date;
 
-// The original 'Employee' class violates SRP because it combines multiple responsibilities: 
-// employee information management, payroll processing, and attendance tracking. 
-// Changes in salary calculations or leave policies would require modifying the same class, 
-// making it harder to maintain and extend.
+// This class violates the Open/Closed Principle (OCP) as it handles multiple responsibilities,
+// such as tax calculation, salary computation, time tracking, and leave management in a single class.
+// Any new tax policy, salary change, or time tracking method would require modifying this class, 
+// making it hard to extend without altering existing code.
+
 
 public class Employee {
     private String name;
